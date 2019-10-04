@@ -35,7 +35,7 @@ def remove_stopwords(book: str_list):
 
 
 def remove_punctuation(book: str_list):
-    return [line.translate(str.maketrans('', '', string.punctuation)) for line in book] # TODO still “ lefti
+    return [line.translate(str.maketrans('', '', string.punctuation)) for line in book]
 
 
 def tokenize(book: str):
