@@ -3,19 +3,20 @@ import pdb
 from nltk.corpus import stopwords as nltk_stopwords
 import string
 import typing
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
+
 
 str_list = typing.List[str]
 
-
 def preprocess_text(book: str_list):
-    book = remove_punctuation(book)
     book = remove_whitespaces(book)
+    book = remove_punctuation(book)
     book = convert_to_lowercase(book)
     book = remove_stopwords(book)
-    # pdb.set_trace()
-    book = ''.join(book)
+    book = ' '.join(book)
     book = tokenize(book)
-    book = perform_stemming(book) # TODO: implement!
+    # book = perform_stemming(book) # TODO: implement!
     return book
 
 
@@ -43,4 +44,5 @@ def tokenize(book: str):
 
 
 def perform_stemming(book):
-    return book
+    ps = PorterStemmer()
+    return [ps.stem(word) for word in book]
