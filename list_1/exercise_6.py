@@ -7,6 +7,11 @@ import string
 from preprocessing import preprocess_text
 
 
+def get_text_file_as_list():
+    with open('shrek.txt') as file: 
+        return [line for line in file]
+
+
 def create_pairs(words): 
     return [(word, 1) for word in words]
 
@@ -23,20 +28,9 @@ def group_words(pairs):
 
 if __name__ == '__main__':
     book = utility.get_text_file_as_list('shrek.txt')
-    words = preprocess_text(book)
-    pairs = create_pairs(words)
-    grouped_words = group_words(pairs)
-    utility.save_to_file('shrek_cloud', grouped_words[23:])
+    chapters = utility.split_by_delimiter(book, "#" * 10)
+    preprocessed_chapters = [preprocess_text(chapter) for chapter in chapters]
     pdb.set_trace()
+    # pairs = create_pairs(words)
+    # grouped_words = group_words(pairs)
 
-
-"""
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
-
-words = ["game","gaming","gamed","games"]
-ps = PorterStemmer()
-
-for word in words:
-    print(ps.stem(word))
-"""
