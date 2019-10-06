@@ -7,30 +7,26 @@ import string
 from preprocessing import preprocess_text
 
 
-def get_text_file_as_list():
-    with open('shrek.txt') as file: 
-        return [line for line in file]
+def prepare_word_cloud_data(chapters):
+    return [get_chapter_cloud(chapters, chapter) for chapter in chapters]
 
 
-def create_pairs(words): 
-    return [(word, 1) for word in words]
-
-
-def group_words(pairs):
-    word = lambda pair: pair[0]
-    occurences = lambda pair: pair[1]
-
-    pairs.sort()
-    words_grouped = [(w, sum(1 for _ in g)) for w, g in itertools.groupby(pairs, key=word)]
-    words_grouped.sort(key=occurences, reverse=True)
-    return words_grouped
+def get_chapter_cloud(chapters, chapter):
+    chapter_cloud_data = []
+    unique_words = set(chapter)
+    for word in unique_words:        
+        weight = utility.tf_idf(word, chapters, chapter)
+        chapter_cloud_data.append((word, weight))
+    weight = lambda element: element[1]
+    chapter_cloud_data.sort(key=weight, reverse=True)
+    return chapter_cloud_data
 
 
 if __name__ == '__main__':
     book = utility.get_text_file_as_list('shrek.txt')
     chapters = utility.split_by_delimiter(book, "#" * 10)
     preprocessed_chapters = [preprocess_text(chapter) for chapter in chapters]
+    data = prepare_word_cloud_data(preprocessed_chapters)
     pdb.set_trace()
-    # pairs = create_pairs(words)
-    # grouped_words = group_words(pairs)
-
+    # TODO: generate word clouds!!!
+    # TODO: subexercise 5!!!

@@ -1,5 +1,7 @@
 from typing import List
 import pdb
+import math
+
 
 def save_to_file(file_name:str, content: List):
     with open(file_name, 'w') as file:
@@ -26,13 +28,18 @@ def split_by_delimiter(iterable, delimiter):
     return [iterable[boundary[0]:boundary[1]+1] for boundary in boundaries]
 
 
-def tf_idf():
-    ...
+def tf_idf(term, corpus, document):
+    return tf(term, document) * idf(term, corpus)
 
 
-def tf():
-    ...
+def tf(term, document):
+    return document.count(term)
 
 
-def idf():
-    ...
+def idf(term, corpus):
+    number_of_documents = len(corpus)
+    documents_with_term = 0
+    for document in corpus: 
+        if tf(term, document) != 0:
+            documents_with_term =+ 1
+    return math.log(number_of_documents / (1+documents_with_term))
