@@ -13,9 +13,9 @@ def preprocess_text(book: str_list):
     book = remove_whitespaces(book)
     book = remove_punctuation(book)
     book = convert_to_lowercase(book)
-    book = remove_stopwords(book)
     book = ' '.join(book)
     book = tokenize(book)
+    book = remove_stopwords(book)
     # book = perform_stemming(book) # TODO: implement!
     return book
 
