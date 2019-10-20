@@ -21,7 +21,7 @@ def get_most_matching_chapters(word, chapters):
 
 
 if __name__ == '__main__':
-    word = 'shrek'
+    word = 'swamp'
     preprocessed_chapters = get_preprocessed_chapters('shrek.txt')
     chapter_weights = get_most_matching_chapters(word, preprocessed_chapters)
     print(chapter_weights)

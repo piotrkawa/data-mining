@@ -1,3 +1,4 @@
+from wordcloud import WordCloud
 import utility
 import itertools
 import nltk 
@@ -26,17 +27,8 @@ if __name__ == '__main__':
     words = preprocess_text(book)
     pairs = create_pairs(words)
     grouped_words = group_words(pairs)
-    utility.save_to_file('shrek_cloud', grouped_words[23:])
+    
+    wc = WordCloud(background_color="white", max_words=2000, contour_width=3, contour_color='steelblue')
+    wc.generate_from_frequencies(dict(grouped_words[15:]))
+    wc.to_file('clouds/book.png')
     pdb.set_trace()
-
-
-"""
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
-
-words = ["game","gaming","gamed","games"]
-ps = PorterStemmer()
-
-for word in words:
-    print(ps.stem(word))
-"""

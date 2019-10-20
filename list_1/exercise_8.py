@@ -31,16 +31,17 @@ def generate_random_paragraph(start_word, words, length=50):
 
     current_word = next_word
 
-    for i in range(length-2):
+    for _ in range(length-2):
         random_index = random.randint(0, len(words[current_word])-1)
         next_word = words[current_word][random_index]
         current_word = next_word
         paragraph.append(next_word)
     return ' '.join(paragraph)
 
+
 if __name__ == '__main__':
     book = utility.get_text_file_as_list('shrek.txt')
     book = preprocessing.preprocess_text(book)
     words_with_successors = get_words_with_most_common_successors(book)
-    paragraph = generate_random_paragraph('shrek', words_with_successors)
+    paragraph = generate_random_paragraph('donkey', words_with_successors)
     pdb.set_trace()

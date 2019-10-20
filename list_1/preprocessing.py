@@ -16,7 +16,7 @@ def preprocess_text(book: str_list):
     book = ' '.join(book)
     book = tokenize(book)
     book = remove_stopwords(book)
-    # book = perform_stemming(book) # TODO: implement!
+    # book = perform_stemming(book) 
     return book
 
 
